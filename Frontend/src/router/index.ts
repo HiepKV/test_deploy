@@ -1,0 +1,81 @@
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import homeRoutes from './routes/home';
+import authRoutes from './routes/auth';
+import CompanyList from '@/components/company/CompanyList.vue';
+import CompanyCreate from '@/components/company/CompanyCreate.vue';
+import SurveyList from '@/components/survey/SurveyList.vue';
+import AccountList from '@/components/account/AccountList.vue';
+import AccountCreate from '@/components/account/AccountCreate.vue';
+import DetailSurvey from '@/components/survey/DetailSurvey.vue';
+import FirstStep from '@/components/survey/createSurvey/FirstStep.vue';
+import CreateSurvey from '@/components/survey/createSurvey/CreateSurvey.vue';
+import SecondStep from '@/components/survey/createSurvey/SecondStep.vue';
+import ThirdStep from '@/components/survey/createSurvey/ThirdStep.vue';
+import FourthStep from '@/components/survey/createSurvey/FourthStep.vue';
+import FifthStep from '@/components/survey/createSurvey/FifthStep.vue';
+import LastStep from '@/components/survey/createSurvey/LastStep.vue';
+import ImportList from '@/components/lists/ImportList.vue';
+import PreviewSurvey from '@/components/recipient/PreviewSurvey.vue';
+import MainSyrvey from '@/components/recipient/MainSyrvey.vue';
+
+const routes: Array<RouteRecordRaw> = [
+  // ...authRoutes,
+  // ...homeRoutes,
+  { path: '/', redirect: '/companies' }, // Trang mặc định
+  { path: '/companies', component: CompanyList },
+  { path: '/surveys', component: SurveyList },
+  { path: '/surveys/:id', component: DetailSurvey},
+  { 
+    path: '/surveys/create', 
+    component: CreateSurvey,
+    children: [
+      { path: '', component: FirstStep },
+      { path: 'step2', component: SecondStep },
+      { path: 'step3', component: ThirdStep},
+      { path: 'step4', component: FourthStep},
+      { path: 'step5', component: FifthStep},
+    ]
+  },
+  { path: '/laststep', component: LastStep},
+  { path: '/accounts', component: AccountList },
+  { path: '/companies/create', component: CompanyCreate }, 
+  { path: '/accounts/create', component: AccountCreate},
+  { path: '/lists', component: ImportList },
+  { path: '/formanswer/preview/:id', component: PreviewSurvey },
+  { path: '/formanswer/main/:id', component: MainSyrvey}
+];
+
+const router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes,
+});
+
+// router.beforeEach((to, from, next) => {
+//   const meta = metaConfig[to.path];
+
+//   // Set the document title
+//   if (meta?.title) {
+//     document.title = meta.title;
+//   }
+
+//   // Remove existing meta tags controlled by Vue Router
+//   const existingMetaTags = document.querySelectorAll('[data-vue-router-controlled]');
+//   existingMetaTags.forEach((tag) => tag.parentNode?.removeChild(tag));
+
+//   // Add new meta tags
+//   if (meta?.meta) {
+//     meta.meta.forEach(({ name, content }) => {
+//       const tag = document.createElement('meta');
+//       tag.setAttribute('name', name);
+//       tag.setAttribute('content', content);
+//       tag.setAttribute('data-vue-router-controlled', ''); // Mark for cleanup
+//       document.head.appendChild(tag);
+//     });
+//   }
+
+//   next();
+// });
+
+
+
+export default router;

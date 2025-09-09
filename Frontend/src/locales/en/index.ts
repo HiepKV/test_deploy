@@ -1,0 +1,86 @@
+import SurveyList from "@/components/survey/SurveyList.vue";
+import { title } from "process";
+
+export const en = {
+  common: {
+    home: 'Home',
+  },
+  auth: {
+    login: 'Login',
+    register: 'Register',
+  },
+  posts: {
+    create: 'Create Post',
+    edit: 'Edit Post',
+    delete: 'Delete Post',
+  },
+  user: {
+    profile: 'Profile',
+    update: 'Update Profile',
+  },
+  slideBar:{
+    dasboard: 'Form submission management',
+    SurveyList: 'Survey List',
+    companyList: 'Company List',
+    list: 'List',
+    accountList: 'Account List',
+    logout: 'Logout'
+  },
+  survey:{
+    plachoder:'Survey name or Company name',
+    btn: 'Add',
+    from: 'from all items / All',
+    items: 'items',
+    name:'Survey Name',
+    status:'Status',
+    company_name:'Company name',
+    total_list:'Number of List',
+    response_total:'Number of reponses',
+    send_date:'Send Date',
+  },
+  company: {
+    plachoder: 'Press Company Name',
+    list:'List Companies',
+    btn: 'Add',
+    from: 'from all items / All',
+    items: 'items',
+    name: 'Company name',
+    manager: 'Maneger',
+    phone: 'Phone number',
+    email: 'Email Address',
+    created_at:'Created At',
+    updated_at:'Updated At',
+    created_by:'Created By',
+    title: 'Create Company Information',
+    placCom: 'Enter company name',
+    manager_detail: 'Manager in charge',
+    required: 'Required',
+    placPhone: 'Enter phone number',
+    placMail: 'Enter email address',
+  },
+  account: {
+    list:'Account List',
+    btn: 'Add',
+    from: 'from all items / All',
+    items: 'items',
+    name: 'ID',
+    memo:'Memo',
+    username: 'Username',
+    pass:'Password',
+    created_at:'Created At',
+    required:'Required',
+    placId:'Number of interviews (10 alphanumeric characters)',
+    placUser:'Input Username here',
+    placPass:'Password at lastest 8 characters',
+    placMemo:'Input Memo here',
+    return:'Return',
+    submit:'Create',
+    title: 'Account Page Create',
+  },
+  list: {
+    name:'List',
+    total: 'Number of list : ',
+    upload:'Upload file to send',
+    download:'Download file Recipients',
+  }
+}

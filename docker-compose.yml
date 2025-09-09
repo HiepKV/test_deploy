@@ -1,0 +1,52 @@
+version: '3.6'
+services:
+  training_mysql:
+    image: mysql
+    container_name: training_mysql
+    ports:
+      - '3307:3306'
+    volumes:
+      - training-mysql-data:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=training
+      - MYSQL_USER=vietis2025
+      - MYSQL_PASSWORD=Vietis@2025
+      - MYSQL_ROOT_PASSWORD=root
+    networks:
+      - be
+    restart: unless-stopped
+  training_webserver:
+    build:
+      context: .
+      dockerfile: .docker/webserver/Dockerfile
+      args:
+        UID: ${UID:-1000}
+        GID: ${GID:-1000}
+        PHP_VERSION: ${PHP_VERSION:-8.2}
+        NODE_VERSION: ${NODE_VERSION:-18}
+        NGINX_VERSION: ${NGINX_VERSION:-1.24}
+    container_name: training_webserver
+    image: agw_sekisui_web
+    privileged: true
+    stdin_open: true
+    ports:
+      - '8080:80'
+      - '444:443'
+    volumes:
+      - ./Backend/.:/var/www/html
+    networks:
+      - be
+    depends_on:
+      - training_mysql
+  mailcatcher:
+    image: schickling/mailcatcher
+    ports:
+      - "3080:1080"
+      - "3025:1025"
+    networks:
+      - be
+networks:
+  be:
+
+volumes:
+  training-mysql-data:
