@@ -25,18 +25,14 @@ COPY . .
 # Cài Laravel dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Tạo SQLite database nếu chưa có
-RUN mkdir -p database && touch database/database.sqlite
+# Đảm bảo thư mục database tồn tại
+RUN mkdir -p /app/database && touch /app/database/database.sqlite
 
 # Cache config và route
 RUN php artisan config:cache && php artisan route:cache
-
-# Luôn đảm bảo có thư mục + file SQLite
-RUN mkdir -p /var/www/html/database && touch /var/www/html/database/database.sqlite
 
 # Expose port cho Render
 EXPOSE 10000
 
 # Start Laravel server
-CMD ["/bin/sh", "-c", "touch /var/www/html/database/database.sqlite && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=10000"]
-
+CMD ["/bin/sh", "-c", "mkdir -p /app/database && touch /app/database/database.sqlite && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=10000"]
