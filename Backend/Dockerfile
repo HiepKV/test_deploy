@@ -31,6 +31,9 @@ RUN mkdir -p database && touch database/database.sqlite
 # Cache config và route
 RUN php artisan config:cache && php artisan route:cache
 
+# Luôn đảm bảo có thư mục + file SQLite
+RUN mkdir -p /var/www/html/database && touch /var/www/html/database/database.sqlite
+
 # Expose port cho Render
 EXPOSE 10000
 
