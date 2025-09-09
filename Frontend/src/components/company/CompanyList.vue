@@ -70,9 +70,11 @@ const goToCreatePage = () => {
   router.push("/companies/create"); // Chuyển trang đúng cách
 };
 // get data
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const fetchData = async (page, search = "") => {
   try {
-    const response = await axios.get(`http://127.0.0.1:8000/api/companies`, {
+    const response = await axios.get(`${API_BASE_URL}/companies`, {
       params: { page, search }, // send keyword to api
     });
     
