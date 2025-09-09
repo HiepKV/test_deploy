@@ -35,4 +35,5 @@ RUN php artisan config:cache && php artisan route:cache
 EXPOSE 10000
 
 # Start Laravel server
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=10000"]
+CMD ["/bin/sh", "-c", "touch /var/www/html/database/database.sqlite && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=10000"]
+
