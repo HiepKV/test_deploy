@@ -50,3 +50,7 @@ Route::get('/export-excel', [ImportController::class, 'export']);
 //recipients
 Route::get('/recipients/{id}', [RecipientController::class, 'getRecipientById']);
 Route::post('/recipients', [RecipientController::class, 'store']);
+
+//auth
+Route::post('/login', [\App\Http\Controllers\Auth\AuthController::class, 'login']);
+Route::middleware('auth:api')->post('/logout', [\App\Http\Controllers\Auth\AuthController::class, 'logout']);

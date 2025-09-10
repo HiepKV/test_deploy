@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Repositories\AccountRepository;
+use App\Repositories\AuthRepository;
 use App\Repositories\Contracts\AccountRepositoryInterface;
+use App\Repositories\Contracts\AuthRepositoryInterface;
 use App\Repositories\Contracts\InforRecipientRepositoryInterface;
 use App\Repositories\Contracts\SurveyRepositoryInterface;
 use App\Repositories\InforRecipientRepository;
@@ -22,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(AccountRepositoryInterface::class, AccountRepository::class);
         $this->app->bind(SurveyRepositoryInterface::class, SurveyRepository::class);
         $this->app->bind(InforRecipientRepositoryInterface::class, InforRecipientRepository::class);
+        $this->app->bind(AuthRepositoryInterface::class, AuthRepository::class);
     }
 
     /**
