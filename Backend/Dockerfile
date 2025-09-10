@@ -34,5 +34,12 @@ RUN php artisan config:cache && php artisan route:cache
 # Expose port cho Render
 EXPOSE 10000
 
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+ENTRYPOINT ["entrypoint.sh"]
+CMD ["php-fpm"]
+
+
 # Start Laravel server
 CMD ["/bin/sh", "-c", "mkdir -p /app/database && touch /app/database/database.sqlite && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=10000"]
