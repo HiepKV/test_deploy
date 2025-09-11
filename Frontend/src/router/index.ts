@@ -19,37 +19,54 @@ import PreviewSurvey from '@/components/recipient/PreviewSurvey.vue';
 import MainSyrvey from '@/components/recipient/MainSyrvey.vue';
 
 const routes: Array<RouteRecordRaw> = [
-  // ...authRoutes,
-  // ...homeRoutes,
-  { path: '/', redirect: '/companies' }, // Trang mặc định
-  { path: '/companies', component: CompanyList },
-  { path: '/surveys', component: SurveyList },
-  { path: '/surveys/:id', component: DetailSurvey},
+  ...authRoutes, // Login, Register
+
+  // Các route yêu cầu đăng nhập
+  { path: '/companies', component: CompanyList, meta: { requiresAuth: true } },
+  { path: '/companies/create', component: CompanyCreate, meta: { requiresAuth: true } },
+  { path: '/surveys', component: SurveyList, meta: { requiresAuth: true } },
+  { path: '/surveys/:id', component: DetailSurvey, meta: { requiresAuth: true } },
   { 
     path: '/surveys/create', 
     component: CreateSurvey,
+    meta: { requiresAuth: true },
     children: [
       { path: '', component: FirstStep },
       { path: 'step2', component: SecondStep },
-      { path: 'step3', component: ThirdStep},
-      { path: 'step4', component: FourthStep},
-      { path: 'step5', component: FifthStep},
+      { path: 'step3', component: ThirdStep },
+      { path: 'step4', component: FourthStep },
+      { path: 'step5', component: FifthStep },
     ]
   },
-  { path: '/laststep', component: LastStep},
-  { path: '/accounts', component: AccountList },
-  { path: '/companies/create', component: CompanyCreate }, 
-  { path: '/accounts/create', component: AccountCreate},
-  { path: '/lists', component: ImportList },
-  { path: '/formanswer/preview/:id', component: PreviewSurvey },
-  { path: '/formanswer/main/:id', component: MainSyrvey}
+  { path: '/laststep', component: LastStep, meta: { requiresAuth: true } },
+  { path: '/accounts', component: AccountList, meta: { requiresAuth: true } },
+  { path: '/accounts/create', component: AccountCreate, meta: { requiresAuth: true } },
+  { path: '/lists', component: ImportList, meta: { requiresAuth: true } },
+  { path: '/formanswer/preview/:id', component: PreviewSurvey, meta: { requiresAuth: true } },
+  { path: '/formanswer/main/:id', component: MainSyrvey, meta: { requiresAuth: true } },
+  { path: '/logout', component: Logout, meta: { requiresAuth: true } },
 ];
+
+
+import { useAuthStore } from '@/store/auth/authStore';
+import Logout from '@/pages/auth/Logout.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
 });
 
+router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore();
+
+  if (to.meta.requiresAuth && !authStore.isAuthenticated) {
+    next({ path: '/login' });
+  } else if (to.path === '/login' && authStore.isAuthenticated) {
+    next({ path: '/companies' });
+  } else {
+    next();
+  }
+});
 // router.beforeEach((to, from, next) => {
 //   const meta = metaConfig[to.path];
 

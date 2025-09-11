@@ -9,8 +9,9 @@ import CompanyList from './components/company/CompanyList.vue';
 import Sidebar from './components/common/Sidebar.vue';
 import { useRoute } from 'vue-router';
 const route = useRoute();
-const hideSidebar = computed(() => route.path.startsWith('/formanswer'));
-</script>
+const hiddenSidebarRoutes = ['/login', '/logout','/register', '/forgot-password','/formanswer'];
+
+const hideSidebar = computed(() => hiddenSidebarRoutes.includes(route.path));</script>
 
 <template>
   <div class="container-fluid h-100">

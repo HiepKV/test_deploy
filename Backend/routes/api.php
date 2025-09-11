@@ -52,5 +52,5 @@ Route::get('/recipients/{id}', [RecipientController::class, 'getRecipientById'])
 Route::post('/recipients', [RecipientController::class, 'store']);
 
 //auth
-Route::post('/login', [\App\Http\Controllers\Auth\AuthController::class, 'login']);
-Route::middleware('auth:api')->post('/logout', [\App\Http\Controllers\Auth\AuthController::class, 'logout']);
+Route::post('/auth/login', [\App\Http\Controllers\Auth\AuthController::class, 'login']);
+Route::middleware('auth:api')->post('/auth/logout', [\App\Http\Controllers\Auth\AuthController::class, 'logout']);

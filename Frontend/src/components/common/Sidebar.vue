@@ -15,7 +15,9 @@
       <li :class="{ active: route.path.startsWith('/accounts') }">
         <router-link to="/accounts">{{ t('slideBar.accountList') }}</router-link>
       </li>
-      <li><a href="#">{{ t('slideBar.logout') }}</a></li>
+      <li :class="{ active: route.path.startsWith('/logout')}">
+        <router-link to="/logout">{{ t('slideBar.logout') }}</router-link>
+      </li>
     </ul>
   </div>
 </template>
