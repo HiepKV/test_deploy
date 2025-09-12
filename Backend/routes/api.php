@@ -54,3 +54,11 @@ Route::post('/recipients', [RecipientController::class, 'store']);
 //auth
 Route::post('/auth/login', [\App\Http\Controllers\Auth\AuthController::class, 'login']);
 Route::middleware('auth:api')->post('/auth/logout', [\App\Http\Controllers\Auth\AuthController::class, 'logout']);
+
+
+Route::get('/check-env', function () {
+    return [
+        'env' => env('JWT_SECRET'),
+        'config' => config('jwt.secret'),
+    ];
+});
