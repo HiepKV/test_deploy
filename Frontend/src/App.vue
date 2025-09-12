@@ -9,9 +9,19 @@ import CompanyList from './components/company/CompanyList.vue';
 import Sidebar from './components/common/Sidebar.vue';
 import { useRoute } from 'vue-router';
 const route = useRoute();
-const hiddenSidebarRoutes = ['/login', '/logout','/register', '/forgot-password','/formanswer', '/formanswer/main'];
+const hiddenSidebarRoutes = [
+  '/login',
+  '/logout',
+  '/register',
+  '/forgot-password',
+  '/formanswer',
+  '/formanswer/main'
+];
 
-const hideSidebar = computed(() => hiddenSidebarRoutes.includes(route.path));</script>
+const hideSidebar = computed(() =>
+  hiddenSidebarRoutes.some(prefix => route.path.startsWith(prefix))
+);
+</script>
 
 <template>
   <div class="container-fluid h-100">
