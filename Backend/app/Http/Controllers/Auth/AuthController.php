@@ -16,18 +16,26 @@ class AuthController
 
     public function login(Request $request)
     {
-        $request->validate([
-            'username' => 'required|string',
-            'password' => 'required|string',
-        ]);
+        try {
+            $request->validate([
+                'username' => 'required|string',
+                'password' => 'required|string',
+            ]);
 
-        $result = $this->authService->login($request->only('username', 'password'));
+            $result = $this->authService->login($request->only('username', 'password'));
 
-        if (!$result['success']) {
-            return response()->json(['message' => $result['message']], 401);
+            if (!$result['success']) {
+                return response()->json(['message' => $result['message']], 401);
+            }
+
+            return response()->json($result['data']);
+        }catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage(),
+                'line' => $e->getLine(),
+                'file' => $e->getFile(),
+            ], 500);
         }
-
-        return response()->json($result['data']);
     }
 
     public function logout()
