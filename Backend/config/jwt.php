@@ -25,8 +25,7 @@ return [
     |
     */
 
-    'secret' => env('JWT_SECRET'),
-
+    'secret' => env('JWT_SECRET', 'default_fallback_secret'),
     /*
     |--------------------------------------------------------------------------
     | JWT Authentication Keys
