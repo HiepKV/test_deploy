@@ -43,7 +43,7 @@ const routes: Array<RouteRecordRaw> = [
   { path: '/accounts/create', component: AccountCreate, meta: { requiresAuth: true } },
   { path: '/lists', component: ImportList, meta: { requiresAuth: true } },
   { path: '/formanswer/preview/:id', component: PreviewSurvey, meta: { requiresAuth: true } },
-  { path: '/formanswer/main/:id', component: MainSyrvey, meta: { requiresAuth: true } },
+  { path: '/formanswer/main/:id', component: MainSyrvey },
   { path: '/logout', component: Logout, meta: { requiresAuth: true } },
 ];
 

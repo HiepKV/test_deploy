@@ -69,21 +69,26 @@ const formatDate = (dateString) => {
 const goToCreatePage = () => {
   router.push("/companies/create"); // Chuyển trang đúng cách
 };
-// get data
+
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const fetchData = async (page, search = "") => {
   try {
+    const token = localStorage.getItem("token"); 
     const response = await axios.get(`${API_BASE_URL}/companies`, {
-      params: { page, search }, // send keyword to api
+      params: { page, search },
+      headers: {
+        Authorization: `Bearer ${token}`, 
+      },
     });
     
     tableData.value = response.data.data;
     totalPages.value = response.data.last_page || 1;
   } catch (error) {
-    console.error("Lỗi khi lấy dữ liệu công ty:", error);
+    console.error("Lỗi khi lấy dữ liệu công ty:", error.response || error);
   }
 };
+
 
 // Call api when change page
 watch(currentPage, (newPage) => {

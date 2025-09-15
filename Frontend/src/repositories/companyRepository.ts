@@ -1,6 +1,4 @@
-import axios from "axios";
-
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import api from "./api";
 
 export const CompanyRepository = {
   async getAll(search: string = "", page: number = 1) {
@@ -8,9 +6,10 @@ export const CompanyRepository = {
     if (search) {
       params.search = search;
     }
-    return await axios.get(`${API_BASE_URL}/companies`, { params });
+    return await api.get("/companies", { params });
   },
+
   async getById(id: number) {
-    return await axios.get(`${API_BASE_URL}/companies/${id}`);
+    return await api.get(`/companies/${id}`);
   }
 };

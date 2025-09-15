@@ -1,6 +1,4 @@
-import axios from "axios";
-
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import api from "./api";
 
 export const AccountRepository = {
   get(search: string = "", page: number = 1) {
@@ -8,9 +6,9 @@ export const AccountRepository = {
     if (search) {
       params.search = search;
     }
-    return axios.get(`${API_BASE_URL}/accounts`, { params });
+    return api.get("/accounts", { params });
   },
   post(data: any) {
-    return axios.post(`${API_BASE_URL}/accounts`, data);
+    return api.post("/accounts", data);
   }
 };

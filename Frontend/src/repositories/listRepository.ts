@@ -1,12 +1,10 @@
-import axios from "axios";
-const API = import.meta.env.VITE_API_BASE_URL;
-
+import api from "./api";
 export const ListRepository = {
     async importList(file : File) {
         const formData = new FormData();
         formData.append("file", file);
 
-        return await axios.post(`${API}/import-excel-result`, formData, {
+        return await api.post(`/import-excel-result`, formData, {
             headers: {
                 "Content-Type": "multipart/form-data"
             },
@@ -17,12 +15,12 @@ export const ListRepository = {
         formData.append("survey_id", surveyId.toString());
         formData.append("file", file);
 
-        return await axios.post(`${API}/import-excel`, formData, {
+        return await api.post(`/import-excel`, formData, {
             headers: { "Content-Type": "multipart/form-data" },
         });
     },
         async exportExcel() {
-            return await axios.get(`${API}/export-excel`, {
+            return await api.get(`/export-excel`, {
             responseType: "blob", 
         });
     },

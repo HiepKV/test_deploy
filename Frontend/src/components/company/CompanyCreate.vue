@@ -103,12 +103,14 @@ const submitForm = async () => {
             niece: company.value.niece,
         };
 
-
+        const token = localStorage.getItem("token");
         const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
         const response = await axios.post(`${API_BASE_URL}/companies`, requestData, {
             headers: {
-                'X-CSRF-TOKEN': csrfToken
+                'X-CSRF-TOKEN': csrfToken,
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
             }
         });
         console.debug("Company Created:", response.data);

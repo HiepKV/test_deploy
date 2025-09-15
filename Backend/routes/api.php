@@ -17,39 +17,40 @@ Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
 });
 
 
-
+Route::middleware('auth:api')->group(function () {
 // Company Routes
-Route::get('/companies', [CompanyController::class, 'index']);
-Route::post('/companies', [CompanyController::class, 'store']);
-Route::get('/companies/{id}', [CompanyController::class, 'show']);
-// Route::put('/companies/{id}', [CompanyController::class, 'update']);
-// Route::delete('/companies/{id}', [CompanyController::class, 'destroy']);
+    Route::get('/companies', [CompanyController::class, 'index']);
+    Route::post('/companies', [CompanyController::class, 'store']);
+    Route::get('/companies/{id}', [CompanyController::class, 'show']);
+    // Route::put('/companies/{id}', [CompanyController::class, 'update']);
+    // Route::delete('/companies/{id}', [CompanyController::class, 'destroy']);
 
-// Manager Routes
-Route::get('/managers', [ManagerController::class, 'index']);
-Route::post('/managers', [ManagerController::class, 'store']);
+    // Manager Routes
+    Route::get('/managers', [ManagerController::class, 'index']);
+    Route::post('/managers', [ManagerController::class, 'store']);
+    // Account Routes
+    Route::get('/accounts', [AccountController::class, 'index']);
+    Route::post('/accounts', [AccountController::class, 'store']);
 
-// Account Routes
-Route::get('/accounts', [AccountController::class, 'index']);
-Route::post('/accounts', [AccountController::class, 'store']);
-
-// Survey Routes
-Route::get('/surveys', [SurveyController::class, 'index']);
-Route::get('/surveys/{id}', [SurveyController::class, 'getById']);
-Route::post('/surveys', [SurveyController::class, 'store']);
+    // Survey Routes
+    Route::get('/surveys', [SurveyController::class, 'index']);
+    Route::get('/surveys/{id}', [SurveyController::class, 'getById']);
+    Route::post('/surveys', [SurveyController::class, 'store']);
 
 
-// Test mail
-Route::get('/send-mail', [MailTestController::class, 'sendTest']);
-Route::post('/import-excel', [ImportController::class, 'checkExcel']); // send mail with keyword, prefectures
-Route::post('/import-excel-result', [ImportController::class, 'previewImport']);
+    // Test mail
+    Route::get('/send-mail', [MailTestController::class, 'sendTest']);
+    Route::post('/import-excel', [ImportController::class, 'checkExcel']); // send mail with keyword, prefectures
+    Route::post('/import-excel-result', [ImportController::class, 'previewImport']);
 
-//Export excel
-Route::get('/export-excel', [ImportController::class, 'export']);
+    //Export excel
+    Route::get('/export-excel', [ImportController::class, 'export']);
 
-//recipients
-Route::get('/recipients/{id}', [RecipientController::class, 'getRecipientById']);
-Route::post('/recipients', [RecipientController::class, 'store']);
+});
+
+    //recipients
+    Route::get('/recipients/{id}', [RecipientController::class, 'getRecipientById']);
+    Route::post('/recipients', [RecipientController::class, 'store']);
 
 //auth
 Route::post('/auth/login', [\App\Http\Controllers\Auth\AuthController::class, 'login']);
